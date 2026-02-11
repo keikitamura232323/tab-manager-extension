@@ -80,6 +80,7 @@ if (window._tabflowLoaded) {
     const iframe = document.createElement("iframe");
     iframe.src = chrome.runtime.getURL("floating-panel.html");
     iframe.style.cssText = "width:100%;height:100%;border:none;display:block;";
+    iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
 
     container.appendChild(iframe);
     document.body.appendChild(container);
