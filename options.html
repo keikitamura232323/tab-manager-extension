@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>TabFlow 設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-container">
+    <header class="options-header">
+      <img src="icons/icon-32.png" alt="TabFlow" class="logo">
+      <h1>TabFlow 設定</h1>
+    </header>
+
+    <main class="options-main">
+      <!-- 表示モード設定 -->
+      <section class="settings-section">
+        <h2>表示モード</h2>
+        <p class="section-description">TabFlow の表示方法を選択してください</p>
+
+        <div class="mode-options">
+          <!-- モード1: Side Panel -->
+          <label class="mode-option">
+            <input type="radio" name="displayMode" value="sidePanel" checked>
+            <div class="mode-card">
+              <h3>Side Panel</h3>
+              <p class="mode-description">
+                Chrome の右パネルに固定表示されます。
+                ブラウザネイティブで最も安定しています。
+              </p>
+              <div class="mode-preview">
+                <div class="preview-browser">
+                  <div class="preview-content">Content</div>
+                  <div class="preview-panel preview-right">Panel</div>
+                </div>
+              </div>
+              <ul class="mode-pros">
+                <li>Chrome ネイティブ</li>
+                <li>最も安定・軽量</li>
+                <li>位置固定で紛らわしくない</li>
+              </ul>
+              <ul class="mode-cons">
+                <li>位置の変更不可</li>
+                <li>右側のみ</li>
+              </ul>
+            </div>
+          </label>
+
+          <!-- モード2: Floating Panel -->
+          <label class="mode-option">
+            <input type="radio" name="displayMode" value="floating">
+            <div class="mode-card">
+              <h3>Floating Panel</h3>
+              <p class="mode-description">
+                ページ上に浮くパネル。
+                位置・サイズをドラッグで変更できます。
+              </p>
+              <div class="mode-preview">
+                <div class="preview-browser">
+                  <div class="preview-panel preview-floating preview-left">Panel</div>
+                  <div class="preview-content">Content</div>
+                </div>
+              </div>
+              <ul class="mode-pros">
+                <li>位置・サイズ変更可能</li>
+                <li>ドラッグで移動</li>
+                <li>カスタマイズ性高い</li>
+              </ul>
+              <ul class="mode-cons">
+                <li>Content Script 経由のため若干重い</li>
+              </ul>
+              <div class="mode-hint">
+                ツールバーの TabFlow アイコンをクリックして開閉します
+              </div>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <!-- その他の設定 -->
+      <section class="settings-section">
+        <h2>その他の設定</h2>
+
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="autoShowPanel" checked>
+            <span>新しいタブを開いたとき、自動でパネルを表示</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="compactMode">
+            <span>コンパクトモード（テキスト表示を最小化）</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="darkMode">
+            <span>ダークモード</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 情報 -->
+      <section class="settings-section">
+        <h2>情報</h2>
+        <p>TabFlow v5.0.0</p>
+        <p class="info-text">
+          このプロジェクトはオープンソースです。
+          フィードバックやご提案は大歓迎です。
+        </p>
+      </section>
+    </main>
+
+    <!-- 保存メッセージ -->
+    <div id="save-message" class="save-message" style="display: none;">
+      設定を保存しました
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

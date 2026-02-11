@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabFlow</title>
+  <link rel="stylesheet" href="side-panel.css">
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="panel-header">
+    <img src="icons/icon-128.png" alt="TabFlow" class="logo">
+    <div class="header-info">
+      <h1>TabFlow</h1>
+      <p class="subtitle">あなたのタブを美しく整理</p>
+    </div>
+    <div class="header-actions">
+      <button id="settingsBtn" class="settings-btn" title="表示モード設定">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+          <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.902 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.116l.094-.318z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- モード切替ドロップダウン -->
+  <div id="modeDropdown" class="mode-dropdown" style="display:none;">
+    <div class="mode-dropdown-item" data-mode="sidePanel">
+      <span class="mode-check" id="check-sidePanel"></span>
+      Side Panel（右固定）
+    </div>
+    <div class="mode-dropdown-item" data-mode="floating">
+      <span class="mode-check" id="check-floating"></span>
+      Floating Panel（左側）
+    </div>
+    <div class="mode-dropdown-divider"></div>
+    <div class="mode-dropdown-item mode-dropdown-link" id="openOptionsPage">
+      その他の設定...
+    </div>
+  </div>
+
+  <!-- 統計バー -->
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-label">タブ</span>
+      <span class="stat-value" id="tabCount">0</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">グループ</span>
+      <span class="stat-value" id="groupCount">0</span>
+    </div>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="nav-bar">
+    <button class="nav-btn" id="openBookmarks" title="ブックマークを開く">
+      <span class="nav-icon">&#9733;</span>
+      <span>ブックマーク</span>
+    </button>
+    <button class="nav-btn" id="openReadingList" title="リーディングリストを開く">
+      <span class="nav-icon">&#128214;</span>
+      <span>リーディングリスト</span>
+    </button>
+  </div>
+
+  <!-- 検索バー -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="タブを検索..." class="search-input">
+    <button id="clearSearch" class="clear-btn">✕</button>
+  </div>
+
+  <!-- タブ一覧 -->
+  <div class="tabs-container">
+    <ul id="tabList" class="tab-list"></ul>
+    <!-- 空状態 -->
+    <div id="emptyState" class="empty-state">
+      <p>検索に一致するタブがありません</p>
+    </div>
+  </div>
+
+  <!-- リーディングリストオーバーレイ -->
+  <div id="readingListOverlay" class="overlay" style="display:none;">
+    <div class="overlay-header">
+      <button id="readingListBack" class="overlay-back-btn" title="戻る">&#8592;</button>
+      <h2 class="overlay-title">リーディングリスト</h2>
+    </div>
+    <ul id="readingListItems" class="overlay-list"></ul>
+    <div id="readingListEmpty" class="empty-state" style="display:none;">
+      <p>リーディングリストは空です</p>
+    </div>
+  </div>
+
+  <!-- トースト通知 -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="side-panel.js"></script>
+</body>
+</html>

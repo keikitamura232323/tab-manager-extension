@@ -1,0 +1,29 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景: 角丸四角 -->
+  <rect width="128" height="128" rx="28" fill="url(#grad1)"/>
+
+  <!-- シンボル: 流線型矢印（3本の流線 + 先端） -->
+  <g transform="translate(64, 64)">
+    <!-- 上の流線 -->
+    <path d="M -28 -18 Q -5 -28 22 -14"
+          stroke="rgba(255,255,255,0.4)" stroke-width="5.5"
+          fill="none" stroke-linecap="round"/>
+    <!-- 中央の流線 -->
+    <path d="M -28 0 Q -5 -6 26 0"
+          stroke="rgba(255,255,255,0.7)" stroke-width="6"
+          fill="none" stroke-linecap="round"/>
+    <!-- 下の流線 -->
+    <path d="M -28 18 Q -5 28 22 14"
+          stroke="white" stroke-width="6.5"
+          fill="none" stroke-linecap="round"/>
+    <!-- 矢印先端 -->
+    <polygon points="30,0 20,-8 22,0 20,8" fill="white"/>
+  </g>
+</svg>
